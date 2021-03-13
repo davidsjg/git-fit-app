@@ -100,6 +100,7 @@ async function handleFormSubmit(event) {
 
   let workoutData = {};
 
+
   if (workoutType === "cardio") {
     workoutData.type = "cardio";
     workoutData.name = cardioNameInput.value.trim();
