@@ -51,7 +51,7 @@ function handleWorkoutTypeChange(event) {
 
 function validateInputs() {
   let isValid = true;
-
+//checking to make sure that any form text area isn't blank
   if (workoutType === "resistance") {
     if (nameInput.value.trim() === "") {
       isValid = false;
@@ -85,7 +85,7 @@ function validateInputs() {
       isValid = false;
     }
   }
-
+//if they fill in the form, activate the buttons
   if (isValid) {
     completeButton.removeAttribute("disabled");
     addButton.removeAttribute("disabled");
@@ -98,9 +98,10 @@ function validateInputs() {
 async function handleFormSubmit(event) {
   event.preventDefault();
 
+  //declaring an object named workoutData to hold user input data
   let workoutData = {};
 
-
+//for the object workoutData above, assigning key/value pairs
   if (workoutType === "cardio") {
     workoutData.type = "cardio";
     workoutData.name = cardioNameInput.value.trim();
@@ -115,11 +116,12 @@ async function handleFormSubmit(event) {
     workoutData.duration = Number(resistanceDurationInput.value.trim());
   }
 
+  //adding exercise, but how is it adding it to the array?
   await API.addExercise(workoutData);
   clearInputs();
   toast.classList.add("success");
 }
-
+//what is toast? location?
 function handleToastAnimationEnd() {
   toast.removeAttribute("class");
   if (shouldNavigateAway) {
