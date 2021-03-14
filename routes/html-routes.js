@@ -1,14 +1,27 @@
-const router = require("express").Router();
+// html-routes.js - this file offers a set of routes for sending users to the various html pages
+
+// Dependencies
 const path = require('path');
 
+
+// Routes
 module.exports = (app) => {
+  // Each of the below routes just handles the HTML page that the user gets sent to.
+
+  // Index route loads view.html
   app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, "index.html")))
-  ;
-  app.get('/post', (req, res) =>
-    res.render("post")
+    res.sendFile(path.join(__dirname, '../routes/index.html'))
   );
-  app.get('/search', (req, res) =>
-    res.render("search")
+
+  // Add route loads the add.html page,
+  // Where users can enter new characters to the db
+  app.get('/stats', (req, res) =>
+    res.sendFile(path.join(__dirname, '../routes/stats.html'))
   );
-}
+
+  // All route loads the all.html page,
+  // Where all characters in the db are displayed
+  app.get('/exercise?id', (req, res) =>
+    res.sendFile(path.join(__dirname, '../public/exercise.html'))
+  );
+};
