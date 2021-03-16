@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/davidsjg/git-fit-app#readme",
   "dependencies": {
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "mongoose": "^5.12.0",
