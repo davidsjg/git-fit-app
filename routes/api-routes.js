@@ -29,7 +29,7 @@ router.get("/api/workouts/range", (req, res) => {
 router.post("/api/workouts", (req, res) => {
   //where is it grabbing Workout from?
   //workout is a model required in  
-  Workout.create({})
+  Workout.insertMany(req.body)
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -59,12 +59,3 @@ router.put("/api/workouts/:id", (req, res) => {
 
 module.exports = router;
 
-router.post("/api/tr", ({ body }, res) => {
-  Transaction.insertMany(body)
-    .then(dbTransaction => {
-      res.json(dbTransaction);
-    })
-    .catch(err => {
-      res.status(400).json(err);
-    });
-});
