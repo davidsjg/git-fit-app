@@ -26,7 +26,7 @@ router.get("/api/workouts/range", (req, res) => {
 });
 
 //aren't we doing a get 
-router.post("/api/exercise/:id", (req, res) => {
+router.post("/api/workouts", (req, res) => {
   //where is it grabbing Workout from?
   //workout is a model required in  
   Workout.insertMany(body)
@@ -39,8 +39,16 @@ router.post("/api/exercise/:id", (req, res) => {
 });
 
 
-router.get("/api/stats", (req, res) => {
-  Workout.find({})
+router.put("/api/workouts/:id", (req, res) => {
+  Workout.findByIdAndUpdate(req.params.id, 
+    {$push:{
+      exercises: body
+    }},
+    {
+      new: true, runValidators: true
+    }
+    
+    )
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
