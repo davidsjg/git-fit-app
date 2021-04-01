@@ -1,6 +1,19 @@
 const router = require("express").Router();
 const Workout = require("../models/workout.js");
 
+router.post("/api/workouts", (req, res) => {
+  //where is it grabbing Workout from?
+  //workout is a model required in  
+  Workout.create({})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+
 router.get("/api/workouts", (req, res) => {
   //somehow have to get the ID of the last workout entered and populate it 
 
@@ -26,10 +39,10 @@ router.get("/api/workouts/range", (req, res) => {
 });
 
 //aren't we doing a get 
-router.post("/api/workouts", (req, res) => {
+router.post("/api/exercise/:id", (req, res) => {
   //where is it grabbing Workout from?
   //workout is a model required in  
-  Workout.insertMany(req.body)
+  Workout.insertMany(body)
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -38,17 +51,8 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-
-router.put("/api/workouts/:id", (req, res) => {
-  Workout.findByIdAndUpdate(req.params.id, 
-    {$push:{
-      exercises: body
-    }},
-    {
-      new: true, runValidators: true
-    }
-    
-    )
+router.get("/api/stats", (req, res) => {
+  Workout.find({})
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -59,3 +63,12 @@ router.put("/api/workouts/:id", (req, res) => {
 
 module.exports = router;
 
+router.post("/api/tr", ({ body }, res) => {
+  Transaction.insertMany(body)
+    .then(dbTransaction => {
+      res.json(dbTransaction);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
